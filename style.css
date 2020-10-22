@@ -8,4 +8,13 @@
     border-radius: 4px;
 }
 
+section img{
+    width: 300px;
+    margin: 10px;
+}
+
+section{
+    width: 100%;
+}
+
 
