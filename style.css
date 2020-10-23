@@ -1,6 +1,4 @@
-.pull-right{
-    float:right;
-}
+
 
 #searchBar{
     padding: 4px;
@@ -21,7 +19,11 @@ section{
     margin: 40px;
 }
 
-#output{
+#output, #topRatedOutput{
     margin-top: 20px;
 }
 
+#nextPage{
+    align-items: center;
+    text-align: center;
+}
