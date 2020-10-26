@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/4323ba3d16.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload=""> 
+<body onload ="getUpcomingMovies()"> 
     <!--Navbar-->
     <header>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
@@ -33,7 +33,7 @@
                         <a class="nav-link" href="rating.html"><i class="fas fa-star"></i> Top Rated </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="latest.html"><i class="fas fa-ticket-alt"></i> Latest </a>
+                        <a class="nav-link" href="upcoming.html"><i class="fas fa-ticket-alt"></i> Upcoming Movies </a>
                     </li>
                 </ul>
             </div>
@@ -41,7 +41,18 @@
 
     </header>
     <main>
-        <div id = "latestMovieOutput" class = "row"></div>
+        <div id = "upcomingMovieOutput" class = "row"></div>
+        <div id = "overlay"></div>
+        <div class = "modal" id = "modal">
+            <div class = "modal-header">
+                <div id = "trailerTitle">Trailer</div>
+                <button id = "close" class = "close-button">&times;</button> 
+            </div>
+            <div id = "modal-content">
+            </div>
+        </div>
+
+
     </main>
 
 

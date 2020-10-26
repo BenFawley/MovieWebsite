@@ -13,6 +13,8 @@ const topRatedURL = "https://api.themoviedb.org/3/movie/top_rated?api_key=f5050c
 const trailerModal = document.getElementById("modal");
 const closeModalButton = document.getElementById("close");
 const modalContent = document.getElementById("modal-content");
+const upcomingMovieOutput = document.getElementById("upcomingMovieOutput");
+const upcomingMovieURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=f5050cde527a737b5e778272d9871dfb";
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("previous");
 let nextBtnID = 1;
@@ -54,7 +56,6 @@ if (document != null) {
     document.onclick = (event) => {
         const target = event.target;
         if (target.tagName.toLowerCase() === "img") {
-            console.log("event: ", event);
             const movieID = target.dataset.movieId;
             retrieveMovieTrailer(movieID);
         }
@@ -66,10 +67,9 @@ if (closeModalButton != null) {
     closeModalButton.onclick = function () {
         trailerModal.style.display = "none";
         document.getElementById("overlay").classList.remove("active");
+        modalContent.innerHTML = null;
     }
 }
-
-
 
 //Function that retrieves movies from API
 function getSearchedMovies(movieName) {
@@ -79,7 +79,7 @@ function getSearchedMovies(movieName) {
         .then((res) => res.json())
         .then(getMovieImages)
         .catch((err) => {
-            console.log("error");
+            console.log("error: ", err);
         })
     searchForm.reset();
 }
@@ -127,7 +127,7 @@ function retrieveTopRatedMovies() {
         .then((res) => res.json())
         .then(getTopRatedMovieImages)
         .catch((err) => {
-            console.log("error");
+            console.log("error: ", err);
         })
 }
 
@@ -140,7 +140,7 @@ function nextPageResults() {
         .then((res) => res.json())
         .then(getTopRatedMovieImages)
         .catch((err) => {
-            console.log("error");
+            console.log("error: ", err);
         })
 }
 
@@ -157,34 +157,42 @@ function previousPageResults() {
             .then((res) => res.json())
             .then(getTopRatedMovieImages)
             .catch((err) => {
-                console.log("error");
+                console.log("error: ", err);
             })
     }
 }
 
+//retrieves the movie trailer related to the selected video
 function retrieveMovieTrailer(movieID) {
     const trailerURL = baseUrl + "movie/" + movieID + "videos" + API_KEY;
     fetch(trailerURL)
         .then((res) => res.json())
         .then((data) => {
-            console.log("data: ", data);
-            const trailerKey = data.results[0].key;
-            trailerModal.style.display = "block";
-            document.getElementById("overlay").classList.add("active");
-            modalContent.innerHTML = null;
-            const iframeContainer = document.createElement("div");
-            iframeContainer.classList.add("iframeContainer");
-            const newIframe = createIframe(trailerKey);
-            iframeContainer.appendChild(newIframe);
-            modalContent.appendChild(iframeContainer);
-
+            if (data.results.length == 0) {
+                alert("This trailer is currently unavailable, Sorry for any Inconvenience caused")
+            }
+            else {
+                for (i = 0; i < data.results.length; i++) {
+                    if (data.results[i].type.toLowerCase() == "trailer") {
+                        const trailerKey = data.results[i].key;
+                        trailerModal.style.display = "block";
+                        document.getElementById("overlay").classList.add("active");
+                        modalContent.innerHTML = null;
+                        const iframeContainer = document.createElement("div");
+                        iframeContainer.classList.add("iframeContainer");
+                        const newIframe = createIframe(trailerKey);
+                        iframeContainer.appendChild(newIframe);
+                        modalContent.appendChild(iframeContainer);
+                    }
+                }
+            }
         })
         .catch((err) => {
-            console.log("error");
+            console.log("error: ", err);
         })
 }
 
-
+//creates an iframe to store the selected movie trailer
 function createIframe(trailerKey) {
     const iframe = document.createElement("iframe");
     iframe.classList.add("responsive-iframe");
@@ -194,4 +202,27 @@ function createIframe(trailerKey) {
     return iframe;
 }
 
-//clean the code once finished: too messy
+//retrieves posters for latest movies
+function getLatestMovieImages(data) {
+    const latestMovies = data.results;
+    const latestMovieDisplay = createMovieOutputSection(latestMovies);
+    latestMovieOutput.appendChild(latestMovieDisplay);
+
+}
+
+//Sends API request to retrieve latest movies
+function getUpcomingMovies() {
+    fetch(upcomingMovieURL)
+        .then((res) => res.json())
+        .then((data) => {
+            const upcomingMovies = data.results;
+            const upcomingMovieDisplay = createMovieOutputSection(upcomingMovies);
+            upcomingMovieOutput.appendChild(upcomingMovieDisplay);
+        })
+        .catch((err) => {
+            console.log("error: ", err);
+        })
+}
+
+//clean the code once finished: create URL function to reduce the number of fetch calls being made
+//improve responsiveness
