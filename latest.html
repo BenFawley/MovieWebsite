@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/4323ba3d16.js" crossorigin="anonymous"></script>
 </head>
 
-<body> 
+<body onload=""> 
     <!--Navbar-->
     <header>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
@@ -26,25 +26,22 @@
             <!--Navbar Links-->
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="rating.html"><i class="fas fa-star"></i> Top Rated </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="latest.html"><i class="fas fa-ticket-alt"></i> Latest </a>
                     </li>
                 </ul>
             </div>
-            <form id = "searchNav">
-                <input id = "searchBar" type ="text" placeholder="Search Movie">
-                <button id = "searchButton" class = "btn btn-primary btn-sm">Find</button>
-            </form>
         </nav>
+
     </header>
     <main>
-        <div id = "output" class = "row"></div>
+        <div id = "latestMovieOutput" class = "row"></div>
     </main>
 
 

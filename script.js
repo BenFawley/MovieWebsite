@@ -1,3 +1,4 @@
+//variables 
 
 const API_KEY = "?api_key=f5050cde527a737b5e778272d9871dfb";
 const baseUrl = "https://api.themoviedb.org/3/";
@@ -9,10 +10,12 @@ const movieBlock = document.getElementById("output");
 const imageURL = "https://image.tmdb.org/t/p/w500";
 const topRatedMoviesOutput = document.getElementById("topRatedOutput");
 const topRatedURL = "https://api.themoviedb.org/3/movie/top_rated?api_key=f5050cde527a737b5e778272d9871dfb";
+const trailerModal = document.getElementById("modal");
+const closeModalButton = document.getElementById("close");
+const modalContent = document.getElementById("modal-content");
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("previous");
 let nextBtnID = 1;
-// add document.ready function for populating page when loaded
 
 
 // Search for Movie Event Listener
@@ -36,11 +39,33 @@ if (nextBtn != null) {
     }
 }
 
-//event listener for previous page on rating.html
+// //event listener for previous page on rating.html
 if (prevBtn != null) {
     prevBtn.onclick = (event) => {
         event.preventDefault();
         previousPageResults();
+    }
+}
+
+
+
+//event listener for clicking on an image
+if (document != null) {
+    document.onclick = (event) => {
+        const target = event.target;
+        if (target.tagName.toLowerCase() === "img") {
+            console.log("event: ", event);
+            const movieID = target.dataset.movieId;
+            retrieveMovieTrailer(movieID);
+        }
+    }
+}
+
+//modal close button functionality
+if (closeModalButton != null) {
+    closeModalButton.onclick = function () {
+        trailerModal.style.display = "none";
+        document.getElementById("overlay").classList.remove("active");
     }
 }
 
@@ -70,7 +95,7 @@ function getMovieImages(data) {
 function displayMovies(results) {
     return results.map((movie) => {
         if (movie.poster_path) {
-            return `<img src=${imageURL + movie.poster_path} movie-id=${movie.id}/>`
+            return `<img src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>`
         }
     })
 }
@@ -120,19 +145,53 @@ function nextPageResults() {
 }
 
 //updates the output when previous page is selected
-function previousPageResults(){
-    if (nextBtnID === 1){
+function previousPageResults() {
+    if (nextBtnID === 1) {
         alert("There are no previous pages")
     }
-    else{
-    nextBtnID--;
-    const newTopRatedURL = topRatedURL + "&page=" + nextBtnID;
-    topRatedMoviesOutput.innerHTML = "";
-    fetch(newTopRatedURL)
+    else {
+        nextBtnID--;
+        const newTopRatedURL = topRatedURL + "&page=" + nextBtnID;
+        topRatedMoviesOutput.innerHTML = "";
+        fetch(newTopRatedURL)
+            .then((res) => res.json())
+            .then(getTopRatedMovieImages)
+            .catch((err) => {
+                console.log("error");
+            })
+    }
+}
+
+function retrieveMovieTrailer(movieID) {
+    const trailerURL = baseUrl + "movie/" + movieID + "videos" + API_KEY;
+    fetch(trailerURL)
         .then((res) => res.json())
-        .then(getTopRatedMovieImages)
+        .then((data) => {
+            console.log("data: ", data);
+            const trailerKey = data.results[0].key;
+            trailerModal.style.display = "block";
+            document.getElementById("overlay").classList.add("active");
+            modalContent.innerHTML = null;
+            const iframeContainer = document.createElement("div");
+            iframeContainer.classList.add("iframeContainer");
+            const newIframe = createIframe(trailerKey);
+            iframeContainer.appendChild(newIframe);
+            modalContent.appendChild(iframeContainer);
+
+        })
         .catch((err) => {
             console.log("error");
         })
-    }
 }
+
+
+function createIframe(trailerKey) {
+    const iframe = document.createElement("iframe");
+    iframe.classList.add("responsive-iframe");
+    iframe.src = `https://www.youtube.com/embed/${trailerKey}`
+    iframe.allowFullscreen = true;
+
+    return iframe;
+}
+
+//clean the code once finished: too messy
