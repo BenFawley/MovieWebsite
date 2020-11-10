@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/4323ba3d16.js" crossorigin="anonymous"></script>
 </head>
 
-<body> 
+<body onload = "populateHomePage()"> 
     <!--Navbar-->
     <header>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
@@ -33,17 +33,25 @@
                         <a class="nav-link" href="rating.html"><i class="fas fa-star"></i> Top Rated </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="upcoming.html"><i class="fas fa-ticket-alt"></i> Latest </a>
+                        <a class="nav-link" href="upcoming.html"><i class="fas fa-ticket-alt"></i> Upcoming </a>
                     </li>
                 </ul>
             </div>
-            <form id = "searchNav">
+            <!-- <form id = "searchNav">
                 <input id = "searchBar" type ="text" placeholder="Search Movie">
                 <button id = "searchButton" class = "btn btn-primary btn-sm">Find</button>
-            </form>
+            </form> -->
         </nav>
     </header>
+
     <main>
+        <section id = "section">
+            <h2>Search for a Movie</h2>
+            <form id = "searchNav">
+                <input id = "searchBar" type ="text" placeholder="Search Movie">
+            </form>
+            <button id = "searchButton" class = "btn btn-primary">Search</button>
+        </section>
         <div id = "output" class = "row"></div>
         <div id = "overlay"></div>
         <div class = "modal" id = "modal">
@@ -55,12 +63,6 @@
             </div>
         </div>
     </main>
-
-
-
-
-
-
 
     <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

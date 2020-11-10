@@ -15,6 +15,7 @@ const closeModalButton = document.getElementById("close");
 const modalContent = document.getElementById("modal-content");
 const upcomingMovieOutput = document.getElementById("upcomingMovieOutput");
 const upcomingMovieURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=f5050cde527a737b5e778272d9871dfb";
+const popularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key=f5050cde527a737b5e778272d9871dfb";
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("previous");
 let nextBtnID = 1;
@@ -71,6 +72,16 @@ if (closeModalButton != null) {
     }
 }
 
+//populates home page with popular movies when loaded
+function populateHomePage(){
+    fetch(popularMoviesURL)
+        .then((res) => res.json())
+        .then(getMovieImages)
+        .catch((err) => {
+            console.log("error: ", err);
+        })
+}
+
 //Function that retrieves movies from API
 function getSearchedMovies(movieName) {
     movieBlock.innerHTML = null;
@@ -104,17 +115,18 @@ function displayMovies(results) {
 function createMovieOutputSection(movies) {
     const newMovieElement = document.createElement("div");
     const outputTemplate = `
-        <section>
+        <section id = "movieOutput">
             ${displayMovies(movies)}
         </section>`;
     newMovieElement.innerHTML = outputTemplate;
     return newMovieElement;
 }
 
-// Top Rated Movies Page -----------
+// --------- Top Rated Movies Page -----------
 
 //retrieves movie posters for top rated page when api request is successful
 function getTopRatedMovieImages(data) {
+    console.log(data);
     const topRatedMovies = data.results;
     const topRatedMovieDisplay = createMovieOutputSection(topRatedMovies);
     topRatedMoviesOutput.appendChild(topRatedMovieDisplay);
@@ -173,7 +185,7 @@ function retrieveMovieTrailer(movieID) {
             }
             else {
                 for (i = 0; i < data.results.length; i++) {
-                    if (data.results[i].type.toLowerCase() == "trailer") {
+                    if (data.results[i].type.toLowerCase() === "trailer") {
                         const trailerKey = data.results[i].key;
                         trailerModal.style.display = "block";
                         document.getElementById("overlay").classList.add("active");
@@ -202,15 +214,9 @@ function createIframe(trailerKey) {
     return iframe;
 }
 
-//retrieves posters for latest movies
-function getLatestMovieImages(data) {
-    const latestMovies = data.results;
-    const latestMovieDisplay = createMovieOutputSection(latestMovies);
-    latestMovieOutput.appendChild(latestMovieDisplay);
+//---------- Upcoming.html page -----------
 
-}
-
-//Sends API request to retrieve latest movies
+//Sends API request to retrieve upcoming movies
 function getUpcomingMovies() {
     fetch(upcomingMovieURL)
         .then((res) => res.json())
@@ -223,6 +229,3 @@ function getUpcomingMovies() {
             console.log("error: ", err);
         })
 }
-
-//clean the code once finished: create URL function to reduce the number of fetch calls being made
-//improve responsiveness
