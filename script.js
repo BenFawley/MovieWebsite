@@ -30,6 +30,10 @@ if (searchButton != null) {
         }
         else {
             getSearchedMovies(searchBar.value);
+            let scrollTo = document.getElementById("output");
+            scrollTo.scrollIntoView({
+                behavior: "smooth"
+            });
         }
     }
 }
