@@ -57,11 +57,18 @@ section img{
     height: 700px;
     max-width: 80%;
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 768px){
     .modal{
-        height: 450px;
+        height: 600px;
     }
 }
+
+@media screen and (max-width: 600px){
+    .modal{
+        height: 480px;
+    }
+}
+
 
 
 .modal-header{
