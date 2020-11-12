@@ -1,4 +1,4 @@
-//variables 
+//variables -- defined globally = potential tight coupling/name collision issues
 
 const API_KEY = "?api_key=f5050cde527a737b5e778272d9871dfb";
 const baseUrl = "https://api.themoviedb.org/3/";
@@ -115,7 +115,7 @@ function displayMovies(results) {
 function createMovieOutputSection(movies) {
     const newMovieElement = document.createElement("div");
     const outputTemplate = `
-        <section id = "movieOutput">
+        <section id = "movieOutput" class = "row">
             ${displayMovies(movies)}
         </section>`;
     newMovieElement.innerHTML = outputTemplate;

@@ -17,11 +17,12 @@ section img{
 
 #movieOutput{
     width: 100%;
-    margin: 30px;
+    margin: 10px;
+    justify-content: center;
 }
 
 #topRatedOutput, #upcomingMovieOutput{
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 #output{
@@ -128,4 +129,8 @@ justify-content: space-between;
 
 #searchBar{
     margin: 30px;
+}
+
+#previous, #next{
+    margin-bottom: 10px;
 }
