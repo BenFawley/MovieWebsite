@@ -51,7 +51,7 @@ section img{
 }
 @media screen and (max-width: 600px){
     .modal{
-        height: 500px;
+        height: 450px;
     }
 }
 
