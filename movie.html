@@ -16,10 +16,10 @@
     <script src="https://kit.fontawesome.com/4323ba3d16.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload ="getUpcomingMovies()"> 
+<body> 
     <!--Navbar-->
     <header>
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
             <a class = "navbar-brand" href="index.html"><img src="tmdblogo.svg" width="120" height="40"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -33,30 +33,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="rating.html"><i class="fas fa-star"></i> Top Rated </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="upcoming.html"><i class="fas fa-ticket-alt"></i> Upcoming </a>
                     </li>
                 </ul>
             </div>
         </nav>
-
     </header>
-    <main>
-        <div id = "upcomingMovieOutput" class = "row"></div>
-        <div id = "overlay"></div>
-        <div class = "modal" id = "modal">
-            <div class = "modal-header">
-                <div id = "trailerTitle">Trailer</div>
-                <button id = "close" class = "close-button">&times;</button> 
-            </div>
-            <div id = "modal-content">
-            </div>
-        </div>
+
+    <main id = "selectedMovieContent">
+        
     </main>
-
-
-
-
 
 
 

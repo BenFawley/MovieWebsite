@@ -16,6 +16,7 @@ const modalContent = document.getElementById("modal-content");
 const upcomingMovieOutput = document.getElementById("upcomingMovieOutput");
 const upcomingMovieURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=f5050cde527a737b5e778272d9871dfb";
 const popularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key=f5050cde527a737b5e778272d9871dfb";
+const selectedMovieOutput = document.getElementById("selectedMovieContent");
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("previous");
 let nextBtnID = 1;
@@ -56,7 +57,7 @@ if (prevBtn != null) {
 
 
 
-//event listener for clicking on an image
+// event listener for clicking on an image
 if (document != null) {
     document.onclick = (event) => {
         const target = event.target;
@@ -66,6 +67,7 @@ if (document != null) {
         }
     }
 }
+
 
 //modal close button functionality
 if (closeModalButton != null) {
@@ -104,6 +106,7 @@ function getMovieImages(data) {
     const movies = data.results;
     const movieDisplay = createMovieOutputSection(movies);
     movieBlock.appendChild(movieDisplay);
+    console.log(movies);
 }
 
 //Function that displays the movie from the results array
@@ -130,7 +133,6 @@ function createMovieOutputSection(movies) {
 
 //retrieves movie posters for top rated page when api request is successful
 function getTopRatedMovieImages(data) {
-    console.log(data);
     const topRatedMovies = data.results;
     const topRatedMovieDisplay = createMovieOutputSection(topRatedMovies);
     topRatedMoviesOutput.appendChild(topRatedMovieDisplay);
@@ -185,7 +187,7 @@ function retrieveMovieTrailer(movieID) {
         .then((res) => res.json())
         .then((data) => {
             if (data.results.length == 0) {
-                alert("This trailer is currently unavailable, Sorry for any Inconvenience caused")
+                alert("This trailer is currently unavailable, Sorry for any inconvenience caused")
             }
             else {
                 for (i = 0; i < data.results.length; i++) {
@@ -233,3 +235,30 @@ function getUpcomingMovies() {
             console.log("error: ", err);
         })
 }
+
+// function loadMovieDetails(movieID){
+//     const newMovieID = movieID.replace(/\D/g,'');
+//     const findMovieURL = `https://api.themoviedb.org/3/movie/${newMovieID}?api_key=f5050cde527a737b5e778272d9871dfb`;
+//     fetch(findMovieURL)
+//         .then((res) => res.json())
+//         .then((data) => {
+//             const results = data;
+//             const newDisplay = createMovieInfoPage(results);
+//             selectedMovieOutput.appendChild(newDisplay);
+//             console.log(data);
+//         })
+//         .catch((err) => {
+//             console.log("error: ", err);
+//     })
+// }
+
+// function createMovieInfoPage(movie){
+//     const newContent = document.createElement("div");
+//     const movieDetailsTemplate = `
+//     <section> 
+//         <h2>${movie.original_title}</h2>
+//         <img src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>
+//     </section>`;
+//     newContent.innerHTML = movieDetailsTemplate;
+//     return newContent;
+// }
