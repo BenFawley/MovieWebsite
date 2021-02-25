@@ -156,3 +156,7 @@ justify-content: space-between;
     text-align: center;
     background-color: #ddd;
 }
+
+section img:hover{
+    opacity: 0.7; 
+}
