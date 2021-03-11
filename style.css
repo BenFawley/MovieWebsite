@@ -15,13 +15,12 @@ html,body
     width: 300px;
 }
 
-section img{
+#section img, #movieOutput img{
     height: 400px;
     width: 350px;
     margin: 10px;
     cursor: pointer;
     border-radius: 30px;
-    
 }
 
 #movieOutput{
@@ -157,6 +156,257 @@ justify-content: space-between;
     background-color: #ddd;
 }
 
-section img:hover{
+.film-image:hover{
     opacity: 0.7; 
+    padding: 5px;
 }
+
+.image{
+    position: relative;
+}
+
+/* .add-to-cart{
+    position: absolute;
+    width: 50%;
+    background-color: darkgray;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+    top: 60%;
+    right: 4%;
+    opacity: 0;
+}
+
+.add-to-cart:hover{
+    color: white;
+}
+
+.film-image:hover.add-to-cart {
+    z-index: -1;
+} */
+
+/* .background{
+    margin-top: 60px;
+    background-color: #000000;
+    background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+    height: 50vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    color: white;
+} */
+
+.background{
+    margin-top: 60px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("");
+    height: 55vh;
+    /* width: 80%; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+#movieProfile{
+    color: white;
+    padding-top: 40px;
+    position: relative;
+}
+
+#movieProfile h5{
+    color: lightgrey;
+}
+
+#movieProfile img{
+    /* height: 400px;
+    width: 350px; */
+    height: 80%;
+    width: 100%;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.overview{
+    position: absolute;
+    bottom: 60px;
+    /* right: 0;  */
+    /* padding-left: 40px;
+    padding-bottom: 20px; */
+}
+
+.movie-info{
+    padding-left: 30px;
+    margin-top: 30px;
+}
+
+.trailer-button{
+    border:none;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: white;
+    margin-left: 10px;
+}
+
+.movie-poster{
+    padding-left: 40px;
+}
+
+.movie-icons{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.movie-icons a{
+    color: white;
+}
+
+.movie-icons i{
+    padding-right: 5px;
+}
+
+.overview p{
+    font-size: 15px;
+}
+
+@media screen and (max-width: 600px){
+    .movie-info{
+        margin-top: 10px;
+    }
+    .movie-icons{
+        padding-top: 10px;
+    }
+    .trailer-button{
+        margin-top: 5px;
+    }
+    .overview{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .overview{
+        bottom: -40px;
+    }
+    .overview p{
+        font-size: 12px;
+    }
+    /* .movie-info{
+        padding-left: 40px;
+    } */
+    .trailer-button{
+        margin-top: 10px;
+    }
+    .overview{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px){
+    .overview{
+        bottom: 20px;
+    }
+    .tagline{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .overview p{
+        font-size: 18px;
+    }
+    .trailer-button{
+        margin-top: 20px;
+    }
+    .overview{
+        bottom: 100px;
+    }
+}
+/* add media queries for padding decrease with screen decrease */
+
+.rating-button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor:none;
+  }
+
+.card{
+    margin: 10px; 
+    float: none; 
+    margin-bottom: 40px;
+    width: 180px;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    text-align: center;
+    border-image: none;
+}
+
+.card-img-top{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    /* border-radius: 20px; */
+    height: 200px;
+    width: 100%;
+}
+
+.card p{
+    padding-top: 5px;
+}
+
+.actors{
+    margin-top: 40px;
+}
+
+.card-wrapper{
+    margin-top: 30px;
+}
+
+.scroll-menu{
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.scroll-menu li{
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .similar-movies, .actors{
+      text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .similar-movies-rating {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    border-radius: 50%;
+    cursor:none;
+  }
+
+  .bold{
+      font-weight: bold;
+  }

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Response Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/4323ba3d16.js" crossorigin="anonymous"></script>
+</head>
+
+<body onload="insertMovieData();">
+    <!--Navbar-->
+    <header>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+            <a class="navbar-brand" href="index.html"><img src="tmdblogo.svg" width="120" height="40"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--Navbar Links-->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rating.html"><i class="fas fa-star"></i> Top Rated </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upcoming.html"><i class="fas fa-ticket-alt"></i> Upcoming </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <form id = "searchNav">
+                    <input id = "searchBar" type ="text" placeholder="Search Movie">
+                    <button id = "searchButton" class = "btn btn-primary btn-sm">Find</button>
+                </form> -->
+        </nav>
+    </header>
+    <!-- End of NavBar -->
+    <main>
+        <!-- Start of Header Content -->
+        <section id="background" class="background">
+            <div id="movieProfile" class="container">
+                <div class="row">
+                    <div class="movie-poster col-6 col-md-5 col-lg-4">
+                        <img id ="poster" src="" class="img-fluid">
+                    </div>
+                    <div class="movie-info col-6 col-md-7">
+                        <div class="movie-title">
+                            <h3 id="title"></h3>
+                            <p id="movieDate"></p>
+                        </div>
+                        <div class="movie-icons">
+                            <button id = "rating" class="rating-button"></button>Rating
+                            <button class="trailer-button">
+                                <i class="fa fa-play"></i>
+                                Play Trailer
+                            </button>
+                        </div>
+                        <div class="tagline">
+                            <p id="tagline"></p>
+                        </div>
+                        <div class="overview">
+                            <h5>Overview:</h5>
+                            <p id ="overview"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End of Header Content -->
+
+        </section>
+        <!-- Start of Cast/Actors Section -->
+
+        <section class="container actors">
+            <h4>Movie Cast</h4>
+            <div class="row card-wrapper scroll-menu">
+                <ul>
+                    <li class="card actor-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                    <li class="card actor-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                    <li class="card actor-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                    <li class="card actor-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                    <li class="card actor-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- End of Actors Section -->
+
+        <!-- Start of Similar Movies Section -->
+
+        <section class="container similar-movies">
+            <h4>Similar Movies</h4>
+            <div class="row card-wrapper scroll-menu">
+                <ul>
+                    <li class="card movie-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/lugOvdaNpbVGQK9TyMRDiUbLtY6.jpg">
+                        <p class="bold">Peter Rabbit</p>
+                        <button class="similar-movies-rating">5.5</button>
+                    </li>
+                    <li class="card movie-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                    <li class="card movie-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                    <li class="card movie-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                    <li class="card movie-card">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
+                        <p class="bold">Actor Name</p>
+                        <p>Character Name</p>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+        <!-- <div id="output" class="row"></div>
+        <div id="overlay"></div>
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div id="trailerTitle">Trailer</div>
+                <button id="close" class="close-button">&times;</button>
+            </div>
+            <div id="modal-content">
+            </div>
+        </div> -->
+
+        <!-- Next Section -->
+
+
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script>
+
+        function insertMovieData(){
+
+            // const movie = JSON.parse(window.localStorage.getItem('movie'));
+
+            const titleValue = localStorage.getItem('title');
+            const image = localStorage.getItem('posterURL');
+            const overviewValue = localStorage.getItem('overview');
+            const dateValue = localStorage.getItem('date');
+            const tagValue = localStorage.getItem('tagline');
+            const ratingValue = localStorage.getItem('rating');
+            const backdropURL = localStorage.getItem('backdrop');
+
+            const title = document.getElementById("title");
+            const date = document.getElementById("movieDate");
+            const overview = document.getElementById("overview");
+            const rating = document.getElementById("rating");
+            const tag = document.getElementById("tagline");
+            const poster = document.getElementById("poster");
+            const header = document.getElementById("background");
+
+            title.innerHTML = `${titleValue}`;
+            poster.src = `${image}`;
+            date.innerHTML = `${dateValue}`;
+            overview.innerHTML = `${overviewValue}`;
+            rating.innerHTML = `${ratingValue}`;
+            tag.innerHTML = `${tagValue}`;
+            header.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("${backdropURL}")`;
+
+            header.stlye.
+
+            
+
+            localStorage.clear();
+        }
+    </script>
+
+</body>
+
+</html>
