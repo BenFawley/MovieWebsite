@@ -120,14 +120,6 @@ function displayMovies(results) {
     })
 }
 
-
-// document.getElementsByClassName("film-image").addEventListener("mouseover", displayCartButton());
-
-// function displayCartButton(){
-
-// }
-
-
 //Creates an element to dump results from search
 function createMovieOutputSection(movies) {
     const newMovieElement = document.createElement("div");
@@ -269,16 +261,6 @@ function getUpcomingMovies() {
 
 // loadMovieDetails(587807);
 
-// function createMovieInfoPage(movie){
-//     const newContent = document.createElement("div");
-//     const movieDetailsTemplate = `
-//     <section> 
-//         <h2>${movie.original_title}</h2>
-//         <img src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>
-//     </section>`;
-//     newContent.innerHTML = movieDetailsTemplate;
-//     return newContent;
-// }
 
 // function getActors(movieID){
 //     const findActors = `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=f5050cde527a737b5e778272d9871dfb`;
@@ -304,7 +286,6 @@ if (document != null) {
         if (target.tagName.toLowerCase() === "img") {
             const movieID = target.dataset.movieId.replace(/\D/g,'');
             viewMovieProfile(movieID);
-            // location.assign("movieprofile.html");
         }
     }
 }
@@ -334,41 +315,13 @@ function viewMovieProfile(movieID){
             localStorage.setItem('tagline', foundMovie.tagline);
             localStorage.setItem('rating', foundMovie.rating);
             localStorage.setItem('backdrop', foundMovie.backdrop)
-            // console.log(localStorage);
-            // insertMovieData();
+
             location.assign("movieprofile.html");
 
             
-
-            // console.log(foundMovie.title);
-            // console.log(foundMovie.poster);
-            // console.log(foundMovie.tagline);
-            // console.log(foundMovie.releaseDate);
-            // console.log(foundMovie.rating);
-            // console.log(foundMovie.overview);
         })
         .catch((err) => {
             console.log("error: ", err);
     })
 }
-
-// function insertMovieData(){
-
-//     const movie = JSON.parse(window.localStorage.getItem('movie'));
-
-
-//     const title = document.getElementById("title");
-//     const date = document.getElementById("movieDate");
-//     const overview = document.getElementById("overview");
-//     const rating = document.getElementById("rating");
-//     const tag = document.getElementById("tagline");
-//     const poster = document.getElementById("poster");
-
-//     title.innerHTML = `${movie.title}`;
-//     poster.src = `${movie.poster}`;
-//     date.innerHTML = `${movie.releaseDate}`;
-//     overview.innerHTML = `${movie.overview}`;
-//     rating.innerHTML = `${movie.vote_average}`;
-//     tag.innerHTML = `${movie.tagline}`;
-// }
 
