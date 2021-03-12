@@ -43,19 +43,19 @@ html,body
 }
 
 .modal{
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 10px;
     z-index: 10;
     background-color: darkgrey;
     width: 700px;
     height: 700px;
-    max-width: 80%;
+    max-width: 90%;
     max-height: 90%;
 }
 @media screen and (max-width: 768px){
@@ -165,45 +165,10 @@ justify-content: space-between;
     position: relative;
 }
 
-/* .add-to-cart{
-    position: absolute;
-    width: 50%;
-    background-color: darkgray;
-    border: none;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    text-align: center;
-    top: 60%;
-    right: 4%;
-    opacity: 0;
-}
-
-.add-to-cart:hover{
-    color: white;
-}
-
-.film-image:hover.add-to-cart {
-    z-index: -1;
-} */
-
-/* .background{
-    margin-top: 60px;
-    background-color: #000000;
-    background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
-    height: 50vh;
-    width: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    color: white;
-} */
-
 .background{
     margin-top: 60px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("");
     height: 55vh;
-    /* width: 80%; */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -221,8 +186,6 @@ justify-content: space-between;
 }
 
 #movieProfile img{
-    /* height: 400px;
-    width: 350px; */
     height: 80%;
     width: 100%;
     margin: 10px;
@@ -233,9 +196,6 @@ justify-content: space-between;
 .overview{
     position: absolute;
     bottom: 60px;
-    /* right: 0;  */
-    /* padding-left: 40px;
-    padding-bottom: 20px; */
 }
 
 .movie-info{
@@ -259,7 +219,6 @@ justify-content: space-between;
 }
 
 .movie-icons{
-    padding-top: 20px;
     padding-bottom: 20px;
 }
 
@@ -272,7 +231,7 @@ justify-content: space-between;
 }
 
 .overview p{
-    font-size: 15px;
+    font-size: 12px;
 }
 
 @media screen and (max-width: 600px){
@@ -294,11 +253,8 @@ justify-content: space-between;
     .overview{
         bottom: -40px;
     }
-    .overview p{
+    /* .overview p{
         font-size: 12px;
-    }
-    /* .movie-info{
-        padding-left: 40px;
     } */
     .trailer-button{
         margin-top: 10px;
@@ -312,14 +268,14 @@ justify-content: space-between;
     .overview{
         bottom: 20px;
     }
-    .tagline{
+    /* .tagline{
         display: none;
-    }
+    } */
 }
 
 @media screen and (min-width: 1200px){
     .overview p{
-        font-size: 18px;
+        font-size: 14px;
     }
     .trailer-button{
         margin-top: 20px;
@@ -328,18 +284,17 @@ justify-content: space-between;
         bottom: 100px;
     }
 }
-/* add media queries for padding decrease with screen decrease */
 
 .rating-button {
     background-color: #008CBA;
     border: none;
     color: white;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 2px 2px;
     border-radius: 50%;
     margin-right: 10px;
     cursor:none;
@@ -389,7 +344,7 @@ justify-content: space-between;
   }
   
   .similar-movies, .actors{
-      text-align: center;
+    text-align: center;
     margin-bottom: 30px;
   }
 

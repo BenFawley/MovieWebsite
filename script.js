@@ -19,7 +19,8 @@ const popularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key=f50
 const selectedMovieOutput = document.getElementById("selectedMovieContent");
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("previous");
-const headerURL = "https://image.tmdb.org/t/p/w1280"
+const headerURL = "https://image.tmdb.org/t/p/w1280";
+const trailerButton = document.getElementById("trailerButton");
 let nextBtnID = 1;
 
 
@@ -56,18 +57,21 @@ if (prevBtn != null) {
     }
 }
 
+if (trailerButton != null) {
+        trailerButton.onclick = () => {
+                const movieID = target.dataset.movieId;
+                retrieveMovieTrailer(movieID);
+        }
+    }
 
+if (trailerButton != null){
+    trailerButton.onclick = (event) => {
+        const selected = document.getElementById("poster");
+        const loadMovieID = selected.dataset.movieId;
+        retrieveMovieTrailer(loadMovieID);
 
-// event listener for clicking on an image
-// if (document != null) {
-//     document.onclick = (event) => {
-//         const target = event.target;
-//         if (target.tagName.toLowerCase() === "img") {
-//             const movieID = target.dataset.movieId;
-//             retrieveMovieTrailer(movieID);
-//         }
-//     }
-// }
+    }
+}
 
 
 //modal close button functionality
@@ -184,7 +188,7 @@ function previousPageResults() {
 
 //retrieves the movie trailer related to the selected video
 function retrieveMovieTrailer(movieID) {
-    const trailerURL = baseUrl + "movie/" + movieID + "videos" + API_KEY;
+    const trailerURL = baseUrl + "movie/" + movieID + "/videos" + API_KEY;
     fetch(trailerURL)
         .then((res) => res.json())
         .then((data) => {
@@ -297,6 +301,7 @@ function viewMovieProfile(movieID){
         .then((movie) => {
 
             const foundMovie = {
+                id : movieID,
                 title : movie.original_title,
                 poster : imageURL + movie.poster_path,
                 tagline : movie.tagline,
@@ -308,13 +313,16 @@ function viewMovieProfile(movieID){
 
             // window.localStorage.setItem('movie', JSON.stringify(foundMovie));
 
+            //need to work out how to send whole object through local storage to reduce code
+
             localStorage.setItem('title', foundMovie.title);
             localStorage.setItem('posterURL', foundMovie.poster);
             localStorage.setItem('overview', foundMovie.overview);
             localStorage.setItem('date', foundMovie.releaseDate);
             localStorage.setItem('tagline', foundMovie.tagline);
             localStorage.setItem('rating', foundMovie.rating);
-            localStorage.setItem('backdrop', foundMovie.backdrop)
+            localStorage.setItem('backdrop', foundMovie.backdrop);
+            localStorage.setItem('id', foundMovie.id);
 
             location.assign("movieprofile.html");
 

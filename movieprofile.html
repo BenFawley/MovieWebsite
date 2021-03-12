@@ -60,7 +60,7 @@
                         </div>
                         <div class="movie-icons">
                             <button id = "rating" class="rating-button"></button>Rating
-                            <button class="trailer-button">
+                            <button id="trailerButton" class="trailer-button">
                                 <i class="fa fa-play"></i>
                                 Play Trailer
                             </button>
@@ -151,7 +151,7 @@
             </div>
 
         </section>
-        <!-- <div id="output" class="row"></div>
+        <div id="output" class="row"></div>
         <div id="overlay"></div>
         <div class="modal" id="modal">
             <div class="modal-header">
@@ -160,7 +160,7 @@
             </div>
             <div id="modal-content">
             </div>
-        </div> -->
+        </div>
 
         <!-- Next Section -->
 
@@ -186,6 +186,7 @@
             const tagValue = localStorage.getItem('tagline');
             const ratingValue = localStorage.getItem('rating');
             const backdropURL = localStorage.getItem('backdrop');
+            const id = localStorage.getItem('id');
 
             const title = document.getElementById("title");
             const date = document.getElementById("movieDate");
@@ -202,10 +203,7 @@
             rating.innerHTML = `${ratingValue}`;
             tag.innerHTML = `${tagValue}`;
             header.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("${backdropURL}")`;
-
-            header.stlye.
-
-            
+            poster.dataset.movieId = `${id}`;
 
             localStorage.clear();
         }
