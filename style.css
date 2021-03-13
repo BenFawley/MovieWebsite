@@ -61,7 +61,8 @@ html,body
     /* border: 1px solid black; */
     border-radius: 10px;
     z-index: 10;
-    background-color: darkgrey;
+    /* background-color: rgba(var(--tmdbDarkBlue), 1);
+    --tmdbDarkBlue: 3,37,65; */
     width: 700px;
     height: 700px;
     max-width: 90%;
@@ -83,6 +84,9 @@ html,body
 align-items: center;
 display: flex;
 justify-content: space-between;
+color: white;
+background-color: rgba(var(--tmdbDarkBlue), 1);
+--tmdbDarkBlue: 3,37,65;
 }
 
 .modal-header #trailerTitle{
@@ -97,6 +101,7 @@ justify-content: space-between;
     background: none;
     font-size: 1.5rem;
     font-weight: bold;
+    color: white;
 }
 
 .modal-content{
