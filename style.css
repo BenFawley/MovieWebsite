@@ -5,6 +5,15 @@ html,body
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
+    /* --tmdbDarkBlue: 3,37,65;
+    background-color: rgba(var(--tmdbDarkBlue), 1); */
+}
+
+.navbar{
+    background-color: rgba(var(--tmdbDarkBlue), 1);
+     --tmdbDarkBlue: 3,37,65;
+    
+
 }
 
 #searchBar{
@@ -365,3 +374,7 @@ justify-content: space-between;
   .bold{
       font-weight: bold;
   }
+
+    .actor-name{
+        font-size: 12px;
+}

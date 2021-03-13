@@ -58,13 +58,13 @@ if (prevBtn != null) {
 }
 
 if (trailerButton != null) {
-        trailerButton.onclick = () => {
-                const movieID = target.dataset.movieId;
-                retrieveMovieTrailer(movieID);
-        }
+    trailerButton.onclick = () => {
+        const movieID = target.dataset.movieId;
+        retrieveMovieTrailer(movieID);
     }
+}
 
-if (trailerButton != null){
+if (trailerButton != null) {
     trailerButton.onclick = (event) => {
         const selected = document.getElementById("poster");
         const loadMovieID = selected.dataset.movieId;
@@ -84,7 +84,7 @@ if (closeModalButton != null) {
 }
 
 //populates home page with popular movies when loaded
-function populateHomePage(){
+function populateHomePage() {
     fetch(popularMoviesURL)
         .then((res) => res.json())
         .then(getMovieImages)
@@ -119,7 +119,7 @@ function displayMovies(results) {
         if (movie.poster_path) {
             return `<div class = "image">
                         <img class="film-image" src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>
-                    </div>`         
+                    </div>`
         }
     })
 }
@@ -266,49 +266,57 @@ function getUpcomingMovies() {
 // loadMovieDetails(587807);
 
 
-// function getActors(movieID){
-//     const findActors = `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=f5050cde527a737b5e778272d9871dfb`;
-//     fetch(findActors)
-//         .then((res) => res.json())
-//         .then((actors) => {
-//             // const results = data.results;
-//             // const newDisplay = createMovieInfoPage(results);
-//             // selectedMovieOutput.appendChild(newDisplay);
-//             console.log(actors);
-//             // console.log(movie.backdrop_path);
-//         })
-//         .catch((err) => {
-//             console.log("error: ", err);
-//     })
-// }
-
-// getActors(587807);
+function getActors(movieID) {
+    const findActors = `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=f5050cde527a737b5e778272d9871dfb`;
+    fetch(findActors)
+        .then((res) => res.json())
+        .then((actors) => {
+            const foundActors = actors;
+            const actorOutput = document.getElementById("actorsList");
+            console.log(foundActors.cast);
+            return foundActors.cast.map((cast) => {
+                if (cast.known_for_department == "Acting") {
+                    const actorLayout = `<li class="card actor-card">
+                    <img class="card-img-top" src=${imageURL + cast.profile_path} data-actor-id=${cast.id}>
+                    <p class="bold">${cast.name}</p>
+                    <p class="actor-name">${cast.character}</p>
+                    </li>`
+                    
+                    actorOutput.innerHTML += actorLayout;
+                    return actorOutput;
+                }
+            });
+        })
+        .catch((err) => {
+            console.log("error: ", err);
+        })
+}
 
 if (document != null) {
     document.onclick = (event) => {
         const target = event.target;
         if (target.tagName.toLowerCase() === "img") {
-            const movieID = target.dataset.movieId.replace(/\D/g,'');
+            const movieID = target.dataset.movieId.replace(/\D/g, '');
             viewMovieProfile(movieID);
         }
     }
 }
 
-function viewMovieProfile(movieID){
+function viewMovieProfile(movieID) {
     const findMovie = `https://api.themoviedb.org/3/movie/${movieID}?api_key=f5050cde527a737b5e778272d9871dfb`;
     fetch(findMovie)
         .then((res) => res.json())
         .then((movie) => {
 
             const foundMovie = {
-                id : movieID,
-                title : movie.original_title,
-                poster : imageURL + movie.poster_path,
-                tagline : movie.tagline,
-                releaseDate : movie.release_date,
-                rating : movie.vote_average,
-                overview : movie.overview,
-                backdrop : headerURL + movie.backdrop_path
+                id: movieID,
+                title: movie.original_title,
+                poster: imageURL + movie.poster_path,
+                tagline: movie.tagline,
+                releaseDate: movie.release_date,
+                rating: movie.vote_average,
+                overview: movie.overview,
+                backdrop: headerURL + movie.backdrop_path
             }
 
             // window.localStorage.setItem('movie', JSON.stringify(foundMovie));
@@ -326,10 +334,9 @@ function viewMovieProfile(movieID){
 
             location.assign("movieprofile.html");
 
-            
+
         })
         .catch((err) => {
             console.log("error: ", err);
-    })
+        })
 }
-

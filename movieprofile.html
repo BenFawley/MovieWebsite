@@ -19,7 +19,7 @@
 <body onload="insertMovieData();">
     <!--Navbar-->
     <header>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <nav class="navbar navbar-expand-sm  navbar-dark fixed-top">
             <a class="navbar-brand" href="index.html"><img src="tmdblogo.svg" width="120" height="40"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -84,32 +84,7 @@
         <section class="container actors">
             <h4>Movie Cast</h4>
             <div class="row card-wrapper scroll-menu">
-                <ul>
-                    <li class="card actor-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
-                    <li class="card actor-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
-                    <li class="card actor-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
-                    <li class="card actor-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
-                    <li class="card actor-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
+                <ul id ="actorsList">
                 </ul>
             </div>
         </section>
@@ -206,6 +181,8 @@
             poster.dataset.movieId = `${id}`;
 
             localStorage.clear();
+            getActors(id);
+            
         }
     </script>
 
