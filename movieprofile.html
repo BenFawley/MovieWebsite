@@ -51,7 +51,7 @@
             <div id="movieProfile" class="container">
                 <div class="row">
                     <div class="movie-poster col-6 col-md-5 col-lg-4">
-                        <img id ="poster" src="" class="img-fluid">
+                        <img id="poster" src="" class="img-fluid">
                     </div>
                     <div class="movie-info col-6 col-md-7">
                         <div class="movie-title">
@@ -59,7 +59,7 @@
                             <p id="movieDate"></p>
                         </div>
                         <div class="movie-icons">
-                            <button id = "rating" class="rating-button"></button>Rating
+                            <button id="rating" class="rating-button"></button>Rating
                             <button id="trailerButton" class="trailer-button">
                                 <i class="fa fa-play"></i>
                                 Play Trailer
@@ -70,7 +70,7 @@
                         </div>
                         <div class="overview">
                             <h5>Overview:</h5>
-                            <p id ="overview"></p>
+                            <p id="overview"></p>
                         </div>
                     </div>
                 </div>
@@ -82,50 +82,93 @@
         <!-- Start of Cast/Actors Section -->
 
         <section class="container actors">
-            <h4>Movie Cast</h4>
-            <div class="row card-wrapper scroll-menu">
-                <ul id ="actorsList">
-                </ul>
+            <div class="row">
+                <div class="col-12">
+                    <h4>Movie Cast</h4>
+                    <div class="row card-wrapper scroll-menu">
+                        <ul id="actorsList">
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- End of Actors Section -->
+
+        <!-- Start of Details/Genre Section -->
+
+        <!-- <section class="container actors">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Details</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h4>Genre</h4>
+                    <button class="genre-button btn col-4">Action</button>
+                    <button class="genre-button btn col-4">Science Fiction</button>
+                    <button class="genre-button btn col-4">Adventure</button>
+                    <button class="genre-button btn col-4">Fantasy</button>
+                </div>
+                <div class="col-6">
+                    <div class="details">
+                        <h6>Status</h6>
+                        <p>Released</p>
+
+                        <h6>Original Language</h6>
+                        <p>English</p>
+
+                        <h6>Budget</h6>
+                        <p>£5000000</p>
+
+                        <h6>Revenue</h6>
+                        <p>£20000000</p>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- End of Details/Genre Section -->
+
+        <!-- Start of Reviews Section -->
+
+        <section class="container">
+            <div class="row social">
+                <div class="reviews">
+                    <h4 id="socialElement">Social</h4>
+                    <div class="review-title" style="text-align:left">
+                        <h5>Reviews</h5>
+                    </div>
+                        <div id="reviewOutput" class="row review-input" style="text-align:left">
+
+                        </div>
+                    <div id="review-link">
+                        <a id="viewFullReview" href="#">View Full Reviews</a>
+                        <a id="closeReviews" href="#">Close Reviews</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- End of Reviews Section -->
 
         <!-- Start of Similar Movies Section -->
 
         <section class="container similar-movies">
             <h4>Similar Movies</h4>
             <div class="row card-wrapper scroll-menu">
-                <ul>
-                    <li class="card movie-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/lugOvdaNpbVGQK9TyMRDiUbLtY6.jpg">
-                        <p class="bold">Peter Rabbit</p>
-                        <button class="similar-movies-rating">5.5</button>
-                    </li>
-                    <li class="card movie-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
-                    <li class="card movie-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
-                    <li class="card movie-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
-                    <li class="card movie-card">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w185/sicAwqCq5PLCj12KlGWFKJLr1Zv.jpg">
-                        <p class="bold">Actor Name</p>
-                        <p>Character Name</p>
-                    </li>
+                <ul id="similarMoviesList">
                 </ul>
             </div>
 
         </section>
+
+        <!-- End of Similar Movies Section -->
+
+        <!-- Start of Trailer Modal iframe -->
+
         <div id="output" class="row"></div>
         <div id="overlay"></div>
         <div class="modal" id="modal">
@@ -137,7 +180,7 @@
             </div>
         </div>
 
-        <!-- Next Section -->
+        <!-- End of Trailer Modal iframe-->
 
 
     </main>
@@ -150,7 +193,7 @@
     <script src="script.js"></script>
     <script>
 
-        function insertMovieData(){
+        function insertMovieData() {
 
             // const movie = JSON.parse(window.localStorage.getItem('movie'));
 
@@ -182,7 +225,9 @@
 
             localStorage.clear();
             getActors(id);
-            
+            getSimilarMovies(id);
+            getMovieReview(id);
+
         }
     </script>
 

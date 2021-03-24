@@ -6,7 +6,7 @@ const searchButton = document.getElementById("searchButton");
 const searchBar = document.getElementById("searchBar");
 const url = "https://api.themoviedb.org/3/search/movie?api_key=f5050cde527a737b5e778272d9871dfb";
 const searchForm = document.getElementById("searchNav");
-const movieBlock = document.getElementById("output");
+const movieBlock = document.getElementById("searchOutput");
 const imageURL = "https://image.tmdb.org/t/p/w500";
 const topRatedMoviesOutput = document.getElementById("topRatedOutput");
 const topRatedURL = "https://api.themoviedb.org/3/movie/top_rated?api_key=f5050cde527a737b5e778272d9871dfb";
@@ -22,7 +22,9 @@ const prevBtn = document.getElementById("previous");
 const headerURL = "https://image.tmdb.org/t/p/w1280";
 const trailerButton = document.getElementById("trailerButton");
 let nextBtnID = 1;
-
+const fullReviewButton = document.getElementById("viewFullReview");
+const reviewCloseButton = document.getElementById("closeReviews");
+const finalOutput = document.getElementById("outputParent");
 
 // Search for Movie Event Listener
 if (searchButton != null) {
@@ -83,6 +85,10 @@ if (closeModalButton != null) {
     }
 }
 
+// function requestURL(){
+
+// }
+
 //populates home page with popular movies when loaded
 function populateHomePage() {
     fetch(popularMoviesURL)
@@ -96,6 +102,7 @@ function populateHomePage() {
 //Function that retrieves movies from API
 function getSearchedMovies(movieName) {
     movieBlock.innerHTML = null;
+    finalOutput.innerHTML = null;
     const newUrl = url + "&query=" + movieName;
     fetch(newUrl)
         .then((res) => res.json())
@@ -120,6 +127,9 @@ function displayMovies(results) {
             return `<div class = "image">
                         <img class="film-image" src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>
                     </div>`
+            // return `<div class = "image">
+            //             <img class="film-image" src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>
+            //         </div>`
         }
     })
 }
@@ -249,23 +259,18 @@ function getUpcomingMovies() {
 //         .then((res) => res.json())
 //         .then((movie) => {
 //             const movieProfileResults = movie;
-//             // const results = data.results;
-//             // const newDisplay = createMovieInfoPage(results);
-//             // selectedMovieOutput.appendChild(newDisplay);
+
 //             console.log(movie);
 //             console.log(movieProfileResults);
-//             console.log(movieProfileResults.overview);
-//             console.log(movieProfileResults.vote_average);
-//             // console.log(movie.backdrop_path);
 //         })
 //         .catch((err) => {
 //             console.log("error: ", err);
 //     })
 // }
 
-// loadMovieDetails(587807);
+// loadMovieDetails(791373);
 
-
+// Gets the actors for chosen movie and displays on profile page.
 function getActors(movieID) {
     const findActors = `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=f5050cde527a737b5e778272d9871dfb`;
     fetch(findActors)
@@ -273,7 +278,6 @@ function getActors(movieID) {
         .then((actors) => {
             const foundActors = actors;
             const actorOutput = document.getElementById("actorsList");
-            console.log(foundActors.cast);
             return foundActors.cast.map((cast) => {
                 if (cast.known_for_department == "Acting") {
                     const actorLayout = `<li class="card actor-card">
@@ -281,7 +285,7 @@ function getActors(movieID) {
                     <p class="bold">${cast.name}</p>
                     <p class="actor-name">${cast.character}</p>
                     </li>`
-                    
+
                     actorOutput.innerHTML += actorLayout;
                     return actorOutput;
                 }
@@ -292,16 +296,29 @@ function getActors(movieID) {
         })
 }
 
+// event listener for clicking on similar movies
 if (document != null) {
     document.onclick = (event) => {
         const target = event.target;
         if (target.tagName.toLowerCase() === "img") {
             const movieID = target.dataset.movieId.replace(/\D/g, '');
             viewMovieProfile(movieID);
+            console.log(movieID);
         }
     }
 }
 
+// if (document != null) {
+//     document.onclick = (event) => {
+//         const target = event.target;
+//         if (target.tagName.toLowerCase() === "li") {
+//             const movieID = target.dataset.movieId.replace(/\D/g, '');
+//             viewMovieProfile(movieID);
+//         }
+//     }
+// }
+
+// fetches and stores movie data in local storage for the on-load function on profile page
 function viewMovieProfile(movieID) {
     const findMovie = `https://api.themoviedb.org/3/movie/${movieID}?api_key=f5050cde527a737b5e778272d9871dfb`;
     fetch(findMovie)
@@ -310,7 +327,7 @@ function viewMovieProfile(movieID) {
 
             const foundMovie = {
                 id: movieID,
-                title: movie.original_title,
+                title: movie.title,
                 poster: imageURL + movie.poster_path,
                 tagline: movie.tagline,
                 releaseDate: movie.release_date,
@@ -321,7 +338,7 @@ function viewMovieProfile(movieID) {
 
             // window.localStorage.setItem('movie', JSON.stringify(foundMovie));
 
-            //need to work out how to send whole object through local storage to reduce code
+            //need to work out how to send whole object through local storage to reduce code 
 
             localStorage.setItem('title', foundMovie.title);
             localStorage.setItem('posterURL', foundMovie.poster);
@@ -339,4 +356,163 @@ function viewMovieProfile(movieID) {
         .catch((err) => {
             console.log("error: ", err);
         })
+}
+
+// fetches and displays similar movies on movie profile page
+function getSimilarMovies(movieID) {
+    const similarMoviesOutput = document.getElementById("similarMoviesList");
+    const similarURL = `https://api.themoviedb.org/3/movie/${movieID}/similar?api_key=f5050cde527a737b5e778272d9871dfb`;
+    fetch(similarURL)
+        .then((res) => res.json())
+        .then((data) => {
+            const similarMovies = data;
+            return similarMovies.results.map((movies) => {
+                if (movies.poster_path) {
+                    const similarMoviesLayout = `<li class="card movie-card">
+                    <img class="card-img-top" src="${imageURL + movies.poster_path}" data-movie-id="${movies.id}">
+                    <p id="film-name" class="bold">${movies.title}</p>
+                    <button class="similar-movies-rating">${movies.vote_average}</button>
+                </li>`
+
+                    similarMoviesOutput.innerHTML += similarMoviesLayout;
+                    return similarMoviesOutput;
+                }
+            });
+        })
+        .catch((err) => {
+            console.log("error: ", err);
+        })
+
+}
+
+//fetches reviews for movie clicked on
+function getMovieReview(movieID) {
+    const reviewURL = `https://api.themoviedb.org/3/movie/${movieID}/reviews?api_key=f5050cde527a737b5e778272d9871dfb`;
+    fetch(reviewURL)
+        .then((res) => res.json())
+        .then((data) => {
+
+            const reviewResults = data.results;
+            if (reviewResults.length === 0) {
+                document.getElementById("reviewOutput").style.textAlign = "center";
+                document.getElementById("review-link").style.display ="none";
+                reviewOutput.innerHTML = `
+                <div class="col-12">
+                    <p>Sorry there are currently no reviews avaliable for this movie</p>
+                </div>`
+            }
+            else {
+                const reviewResultsOutput = reviewResults.slice(0, 3);
+                return reviewResultsOutput.map((reviews) => {
+                    if (reviews.author_details.avatar_path != null) {
+
+                        //required review variables
+                        let reviewRating = reviews.author_details.rating;
+                        const reviewUsername = reviews.author_details.username;
+                        const reviewContent = reviews.content;
+                        let reviewAvatar = reviews.author_details.avatar_path;
+
+                        //validate avatar link
+                        const linkValidate = reviewAvatar.substring(0, 35);
+                        if(linkValidate == "/https://secure.gravatar.com/avatar"){
+                            reviewAvatar = reviews.author_details.avatar_path.replace("/", "");
+                        }
+                        else{
+                            reviewAvatar = "https://secure.gravatar.com/avatar" + reviewAvatar;
+                        }
+
+                        if (reviewRating == null) {
+                            reviewRating = "n/a";
+                        }
+                        displayReviews(reviewAvatar, reviewRating, reviewUsername, reviewContent);
+
+                    }
+                })
+            }
+        })
+        .catch((err) => {
+            console.log("error: ", err);
+        })
+}
+
+//displays reviews for chosen movie
+function displayReviews(reviewAvatar, reviewRating, reviewUsername, reviewContent){
+    const reviewOutput = document.getElementById("reviewOutput");
+    reviewOutput.innerHTML += `
+        <div id="user-input-header" class="col-4">
+            <h6><img src="${reviewAvatar}"></img>${reviewUsername}
+            </h6>
+            <p id="reviewDate">Posted on: 11/2/2020
+            <button id="review-rating">
+            <i class="fa fa-star"></i>
+            ${reviewRating}
+            </button>
+            </p>
+        </div>
+        <div id="user-input-content" class="col-7">
+            <p id="content">${reviewContent}</p>
+        </div>`
+    
+}
+
+// opens full length reviews
+if (fullReviewButton != null){
+    fullReviewButton.onclick = () => {
+        const reviewSection = document.getElementById("user-input-content");
+        reviewSection.style.setProperty("max-height", "3000px");
+        reviewSection.style.removeProperty("overflow");
+        reviewSection.style.removeProperty("text-overflow");
+        fullReviewButton.style.display = "none";
+        reviewCloseButton.style.setProperty("display", "block");
+    }
+}
+
+//closes full length reviews
+if (reviewCloseButton != null){
+    reviewCloseButton.onclick = () => {
+        const reviewSection = document.getElementById("user-input-content");
+        reviewSection.style.setProperty("max-height", "150px");
+        reviewCloseButton.style.display = "none";
+        fullReviewButton.style.setProperty("display", "block");
+
+    }
+}
+
+function getGenre(genreID, genreTitle){
+    const genreURL = baseUrl + "discover/movie" + API_KEY + "&with_genres=" + genreID;
+    const listElement = document.createElement("ul");
+    const imageRow = document.createElement("div");
+    const rowTitle = document.createElement("h4");
+    rowTitle.innerHTML = genreTitle;
+    imageRow.setAttribute("id", "output");
+    imageRow.classList.add("row", "card-wrapper", "scroll-menu");
+
+    fetch(genreURL)
+    .then((res) => res.json())
+        .then((data) => {
+            return data.results.map((movie) => {
+                if (movie.poster_path) {
+                    const homeLayout = `<li>
+                                <img class="film-image" src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>
+                                </li>`
+                            listElement.innerHTML += homeLayout;
+                }
+                imageRow.appendChild(rowTitle)
+                imageRow.appendChild(listElement);
+                finalOutput.appendChild(imageRow);
+                return finalOutput;
+            });
+        })
+        .catch((err) => {
+            console.log("error: ", err);
+        })
+}
+
+
+function loadHomePage(){
+    getGenre(12, "Adventure");
+    getGenre(35, "Comedy");
+    getGenre(28, "Action");
+    getGenre(16, "Animation");
+    getGenre(27, "Horror");
 }

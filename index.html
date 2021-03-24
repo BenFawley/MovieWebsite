@@ -16,14 +16,14 @@
     <script src="https://kit.fontawesome.com/4323ba3d16.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload = "populateHomePage()"> 
+<body onload="loadHomePage()">
     <!--Navbar-->
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
-            <a class = "navbar-brand" href="index.html"><img src="tmdblogo.svg" width="120" height="40"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <a class="navbar-brand" href="index.html"><img src="tmdblogo.svg" width="120" height="40"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             <!--Navbar Links-->
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav ml-auto">
@@ -37,36 +37,41 @@
                         <a class="nav-link" href="upcoming.html"><i class="fas fa-ticket-alt"></i> Upcoming </a>
                     </li>
                 </ul>
-            </div>
+            </nav>
             <!-- <form id = "searchNav">
                 <input id = "searchBar" type ="text" placeholder="Search Movie">
-                <button id = "searchButton" class = "btn btn-primary btn-sm">Find</button>
+                <button id = "searchButton" class = "btn btn-primary btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form> -->
-        </nav>
+        </div>
     </header>
 
     <main>
-        <section id = "section">
+        <section id="section">
             <h2>Search for a Movie</h2>
-            <form id = "searchNav">
-                <input id = "searchBar" type ="text" placeholder="Search Movie">
+            <form id="searchNav">
+                <input id="searchBar" type="text" placeholder="Search Movie">
             </form>
-            <button id = "searchButton" class = "btn btn-primary">Search</button>
+            <button id="searchButton" class="btn btn-primary">Search</button>
         </section>
-        <div id = "output" class = "row"></div>
-        <div id = "overlay"></div>
-        <div class = "modal" id = "modal">
-            <div class = "modal-header">
-                <div id = "trailerTitle">Trailer</div>
-                <button id = "close" class = "close-button">&times;</button> 
+
+        <section id="outputParent" class="container">
+        </section>
+
+        <div id="searchOutput" class="row"></div>
+
+        <div id="overlay"></div>
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div id="trailerTitle">Trailer</div>
+                <button id="close" class="close-button">&times;</button>
             </div>
-            <div id = "modal-content">
+            <div id="modal-content">
             </div>
         </div>
 
         <!-- Next Section -->
 
-    
+
     </main>
 
     <!-- Bootstrap JS -->

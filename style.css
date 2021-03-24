@@ -5,15 +5,11 @@ html,body
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
-    /* --tmdbDarkBlue: 3,37,65;
-    background-color: rgba(var(--tmdbDarkBlue), 1); */
 }
 
 .navbar{
     background-color: rgba(var(--tmdbDarkBlue), 1);
      --tmdbDarkBlue: 3,37,65;
-    
-
 }
 
 #searchBar{
@@ -27,6 +23,16 @@ html,body
 #section img, #movieOutput img{
     height: 400px;
     width: 350px;
+    /* height: 200px;
+    width: 200px; */
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+#output img{
+    height: 200px;
+    width: 150px;
     margin: 10px;
     cursor: pointer;
     border-radius: 30px;
@@ -43,8 +49,10 @@ html,body
 }
 
 #output{
-    margin-top: 10px;
+    margin: 30px 0px;
+    /* justify-content: center; */
 }
+
 
 #nextPage{
     align-items: center;
@@ -52,17 +60,13 @@ html,body
 }
 
 .modal{
-    /* padding: 10px 15px; */
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* border: 1px solid black; */
     border-radius: 10px;
     z-index: 10;
-    /* background-color: rgba(var(--tmdbDarkBlue), 1);
-    --tmdbDarkBlue: 3,37,65; */
     width: 700px;
     height: 700px;
     max-width: 90%;
@@ -142,11 +146,11 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
     pointer-events: all;
 }
 
-#viewMore{
+/* #viewMore{
     position: absolute;
     float: right;
     margin-top: 20px;
-}
+} */
 
 #section{
     padding-top: 200px;
@@ -181,7 +185,7 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
 
 .background{
     margin-top: 60px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("");
     height: 55vh;
     background-position: center;
     background-repeat: no-repeat;
@@ -207,11 +211,6 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
     border-radius: 30px;
 }
 
-.overview{
-    position: absolute;
-    bottom: 60px;
-}
-
 .movie-info{
     padding-left: 30px;
     margin-top: 30px;
@@ -225,7 +224,6 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
     overflow: hidden;
     outline:none;
     color: white;
-    margin-left: 10px;
 }
 
 .movie-poster{
@@ -303,7 +301,6 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
     background-color: #008CBA;
     border: none;
     color: white;
-    padding: 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -312,6 +309,8 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
     border-radius: 50%;
     margin-right: 10px;
     cursor:none;
+    width: 32px;
+    height: 30px;
   }
 
 .card{
@@ -329,9 +328,9 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
 .card-img-top{
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    /* border-radius: 20px; */
     height: 200px;
     width: 100%;
+    cursor: pointer;
 }
 
 .card p{
@@ -349,6 +348,7 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
 .scroll-menu{
     overflow: auto;
     white-space: nowrap;
+    width: 100%;
 }
 
 .scroll-menu li{
@@ -357,16 +357,16 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
     text-decoration: none;
   }
   
-  .similar-movies, .actors{
+.similar-movies, .actors, .reviews{
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
 
-  .similar-movies-rating {
-    background-color: #008CBA;
+.similar-movies-rating{
+    background-color: rgba(var(--tmdbDarkBlue), 1);
+    --tmdbDarkBlue: 3,37,65;
     border: none;
     color: white;
-    padding: 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -374,12 +374,147 @@ background-color: rgba(var(--tmdbDarkBlue), 1);
     margin: 2px 2px;
     border-radius: 50%;
     cursor:none;
+    width: 40px;
+    height: 40px;
   }
 
-  .bold{
+.bold{
       font-weight: bold;
   }
 
-    .actor-name{
-        font-size: 12px;
+.actor-name, #film-name{
+    font-size: 12px;
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+    overflow: hidden;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--tmdbDarkBlue), 1);
+    --tmdbDarkBlue: 3,37,65;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background:rgba(0, 0, 0, .8);
+  }
+
+  .actors h4, .similar-movies h4, .reviews h4, .reviews h5{
+    color: rgba(var(--tmdbDarkBlue), 1);
+    --tmdbDarkBlue: 3,37,65;
+  }
+
+  .card-img-top:hover{
+      opacity: 0.8;
+  }
+
+  .reviews{
+      border-radius: 10px;
+      border: 2px solid rgba(var(--tmdbDarkBlue), 1);
+      --tmdbDarkBlue: 3,37,65;
+      padding: 30px;
+      width: 100%;
+  }
+
+
+
+  #user-input-header{
+    background-color: rgba(var(--lightGrey), 1);
+    --lightGrey: 227,227,227;
+    border-radius: 10px;
+  }
+  
+  #user-input-header img{
+      height: 40px;
+      width: 40px;
+      margin: 10px 10px 10px 0px;
+  }
+
+  #review-rating{
+    border:none;
+    border-radius: 5px;
+    background-color: rgba(var(--tmdbDarkBlue), 1);
+    --tmdbDarkBlue: 3,37,65;
+    overflow: hidden;
+    outline:none;
+    color: white;
+    margin-top: 10px;
+  }
+
+  #user-input-content{
+    border-radius: 10px;
+    padding: 5px;
+    max-height: 150px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px 0px 5px 10px;
+  }
+
+  .review-title{
+      margin-bottom: 10px;
+  }
+
+  .review-input{
+    background-color: rgba(var(--lightGrey), 1);
+    --lightGrey: 227,227,227;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    margin-top: 20px;
+  }
+
+  .details{
+      margin: 20px 10px;
+  }
+
+  /* .genre-button{
+    background-color: rgba(var(--tmdbDarkBlue), 1);
+    --tmdbDarkBlue: 3,37,65;
+      color: white;
+      width: 100px;
+      height: 40px;
+      margin-top: 10px;
+      border-radius: 20px;
+      font-size: 10px;
+  }
+
+  .button-parent{
+      padding: 60px 0px;
+      padding-left: 10px;
+      text-align: center;
+  }
+
+  .genre-button:hover{
+      opacity: 0.8;
+      color: white;
+  }  */
+
+  #review-link{
+      text-align: center;
+      padding-top: 20px;
+  }
+
+  #reviewDate{
+      font-size: 14px;
+  }
+
+  #closeReviews{
+      display: none;
+  }
+
+  #output h4{
+      padding-left: 70px;
+      color: rgba(var(--tmdbDarkBlue), 1);
+      --tmdbDarkBlue: 3,37,65;
+  }
