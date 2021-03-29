@@ -35,7 +35,7 @@ if (searchButton != null) {
         }
         else {
             getSearchedMovies(searchBar.value);
-            const scrollTo = document.getElementById("output");
+            const scrollTo = document.getElementById("searchOutput");
             scrollTo.scrollIntoView({
                 behavior: "smooth"
             });
@@ -85,20 +85,6 @@ if (closeModalButton != null) {
     }
 }
 
-// function requestURL(){
-
-// }
-
-//populates home page with popular movies when loaded
-function populateHomePage() {
-    fetch(popularMoviesURL)
-        .then((res) => res.json())
-        .then(getMovieImages)
-        .catch((err) => {
-            console.log("error: ", err);
-        })
-}
-
 //Function that retrieves movies from API
 function getSearchedMovies(movieName) {
     movieBlock.innerHTML = null;
@@ -127,9 +113,6 @@ function displayMovies(results) {
             return `<div class = "image">
                         <img class="film-image" src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>
                     </div>`
-            // return `<div class = "image">
-            //             <img class="film-image" src=${imageURL + movie.poster_path} data-movie-id=${movie.id}/>
-            //         </div>`
         }
     })
 }
@@ -252,24 +235,6 @@ function getUpcomingMovies() {
         })
 }
 
-// function loadMovieDetails(movieID){
-//     // const newMovieID = movieID.replace(/\D/g,'');
-//     const findMovieURL = `https://api.themoviedb.org/3/movie/${movieID}?api_key=f5050cde527a737b5e778272d9871dfb`;
-//     fetch(findMovieURL)
-//         .then((res) => res.json())
-//         .then((movie) => {
-//             const movieProfileResults = movie;
-
-//             console.log(movie);
-//             console.log(movieProfileResults);
-//         })
-//         .catch((err) => {
-//             console.log("error: ", err);
-//     })
-// }
-
-// loadMovieDetails(791373);
-
 // Gets the actors for chosen movie and displays on profile page.
 function getActors(movieID) {
     const findActors = `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=f5050cde527a737b5e778272d9871dfb`;
@@ -308,16 +273,6 @@ if (document != null) {
     }
 }
 
-// if (document != null) {
-//     document.onclick = (event) => {
-//         const target = event.target;
-//         if (target.tagName.toLowerCase() === "li") {
-//             const movieID = target.dataset.movieId.replace(/\D/g, '');
-//             viewMovieProfile(movieID);
-//         }
-//     }
-// }
-
 // fetches and stores movie data in local storage for the on-load function on profile page
 function viewMovieProfile(movieID) {
     const findMovie = `https://api.themoviedb.org/3/movie/${movieID}?api_key=f5050cde527a737b5e778272d9871dfb`;
@@ -338,7 +293,7 @@ function viewMovieProfile(movieID) {
 
             // window.localStorage.setItem('movie', JSON.stringify(foundMovie));
 
-            //need to work out how to send whole object through local storage to reduce code 
+            //need to work out how to send whole object through local storage to reduce code (being passed as reference not value)
 
             localStorage.setItem('title', foundMovie.title);
             localStorage.setItem('posterURL', foundMovie.poster);
@@ -425,7 +380,6 @@ function getMovieReview(movieID) {
                             reviewRating = "n/a";
                         }
                         displayReviews(reviewAvatar, reviewRating, reviewUsername, reviewContent);
-
                     }
                 })
             }
@@ -478,6 +432,7 @@ if (reviewCloseButton != null){
     }
 }
 
+//fetches and displays movies for each genre
 function getGenre(genreID, genreTitle){
     const genreURL = baseUrl + "discover/movie" + API_KEY + "&with_genres=" + genreID;
     const listElement = document.createElement("ul");
@@ -508,11 +463,35 @@ function getGenre(genreID, genreTitle){
         })
 }
 
-
+// populates the home page
 function loadHomePage(){
-    getGenre(12, "Adventure");
-    getGenre(35, "Comedy");
-    getGenre(28, "Action");
-    getGenre(16, "Animation");
-    getGenre(27, "Horror");
+    const genreList = "genre/movie/list";
+    const genreListURL = baseUrl + genreList + API_KEY;
+
+    fetch(genreListURL)
+    .then((res) => res.json())
+        .then((data) => {
+            return data.genres.map((genre) => {
+                getGenre(genre.id, genre.name);
+            });
+        })
+        .catch((err) => {
+            console.log("error: ", err);
+        })
 }
+
+// creating TV shows page
+
+// function loadTvPage(){
+//     const tvSearch = ["tv/airing_today", "tv/latest", "tv/popular", "tv/top_rated"];
+//     tvSearch.map((search) => {
+//         console.log(tvSearch);
+//         getTvShows(search);
+//     })
+// }
+
+// loadTvPage();
+
+// function getTvShows(search){
+//     const tvURL = baseUrl + search + API_KEY;
+// }

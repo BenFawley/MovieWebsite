@@ -20,10 +20,10 @@
     <!--Navbar-->
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
-                <a class="navbar-brand" href="index.html"><img src="tmdblogo.svg" width="120" height="40"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <a class="navbar-brand" href="index.html"><img src="tmdblogo.svg" width="120" height="40"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <!--Navbar Links-->
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav ml-auto">
@@ -37,21 +37,41 @@
                         <a class="nav-link" href="upcoming.html"><i class="fas fa-ticket-alt"></i> Upcoming </a>
                     </li>
                 </ul>
-            </nav>
-            <!-- <form id = "searchNav">
-                <input id = "searchBar" type ="text" placeholder="Search Movie">
-                <button id = "searchButton" class = "btn btn-primary btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </form> -->
-        </div>
+                <form id="searchNav">
+                    <input id="searchBar" type="text" placeholder="Search Movie">
+                    <button id="searchButton" class="btn btn-primary btn-sm"><i class="fa fa-search"
+                            aria-hidden="true"></i></button>
+                </form>
+            </div>
+        </nav>
+
     </header>
 
     <main>
-        <section id="section">
+        <!-- <section id="section">
             <h2>Search for a Movie</h2>
             <form id="searchNav">
                 <input id="searchBar" type="text" placeholder="Search Movie">
             </form>
             <button id="searchButton" class="btn btn-primary">Search</button>
+        </section> -->
+        <section id="body">
+            <div class="carousel-container">
+                <input type="radio" name="slider" id="item-1" checked>
+                <input type="radio" name="slider" id="item-2">
+                <input type="radio" name="slider" id="item-3">
+                <div class="cards">
+                    <label class="carousel-card" for="item-1" id="film-1">
+                        <img class="img" src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
+                    </label>
+                    <label class="carousel-card" for="item-2" id="film-2">
+                        <img class="img" src="https://image.tmdb.org/t/p/w500/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg">
+                    </label>
+                    <label class="carousel-card" for="item-3" id="film-3">
+                        <img class="img" src="https://image.tmdb.org/t/p/w500/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg">
+                    </label>
+                </div>
+            </div>
         </section>
 
         <section id="outputParent" class="container">
