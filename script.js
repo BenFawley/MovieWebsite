@@ -314,12 +314,14 @@ function viewMovieProfile(movieID) {
 }
 
 // fetches and displays similar movies on movie profile page
+//api request is currently returning an empty object when it was working previously.
 function getSimilarMovies(movieID) {
     const similarMoviesOutput = document.getElementById("similarMoviesList");
     const similarURL = `https://api.themoviedb.org/3/movie/${movieID}/similar?api_key=f5050cde527a737b5e778272d9871dfb`;
     fetch(similarURL)
         .then((res) => res.json())
         .then((data) => {
+            console.log(data);
             const similarMovies = data;
             return similarMovies.results.map((movies) => {
                 if (movies.poster_path) {
